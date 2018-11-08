@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2009-2018 Lightbend Inc. <https://www.lightbend.com>
  */
 
@@ -702,6 +702,12 @@ class DistributedPubSubMediator(settings: DistributedPubSubSettings) extends Act
         nodes += m.address
 
     case MemberLeft(m) ⇒
+      if (matchingRole(m)) {
+        nodes -= m.address
+        registry -= m.address
+      }
+
+    case MemberDowned(m) ⇒
       if (matchingRole(m)) {
         nodes -= m.address
         registry -= m.address

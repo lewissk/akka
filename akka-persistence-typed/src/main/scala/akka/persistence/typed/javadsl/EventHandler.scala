@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2018 Lightbend Inc. <https://www.lightbend.com>
  */
 
@@ -79,6 +79,19 @@ final class EventHandlerBuilder[State >: Null, Event]() {
    */
   def matchAny(biFunction: BiFunction[State, Event, State]): EventHandler[State, Event] = {
     addCase(_ ⇒ true, biFunction.asInstanceOf[BiFunction[State, Event, State]])
+    build()
+  }
+
+  /**
+   * Match any event.
+   *
+   * Use this when then `State` is not needed in the `handler`, otherwise there is an overloaded method that pass
+   * the state in a `BiFunction`.
+   */
+  def matchAny(f: JFunction[Event, State]): EventHandler[State, Event] = {
+    matchAny(new BiFunction[State, Event, State] {
+      override def apply(state: State, event: Event): State = f(event)
+    })
     build()
   }
 

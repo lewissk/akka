@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2017-2018 Lightbend Inc. <https://www.lightbend.com>
  */
 
@@ -132,8 +132,8 @@ class AskSpec extends ScalaTestWithActorTestKit("""
       val probe = TestProbe[AnyRef]("probe")
       val behv =
         Behaviors.receive[String] {
-          case (ctx, "start-ask") ⇒
-            ctx.ask[Question, Long](probe.ref)(Question(_)) {
+          case (context, "start-ask") ⇒
+            context.ask[Question, Long](probe.ref)(Question(_)) {
               case Success(42L) ⇒
                 throw new RuntimeException("Unsupported number")
               case _ ⇒ "test"

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2017-2018 Lightbend Inc. <https://www.lightbend.com>
  */
 
@@ -34,7 +34,7 @@ public class ManualTimerExampleTest extends JUnitSuite {
     TestProbe<Tock> probe = testKit.createTestProbe();
     Behavior<Tick> behavior = Behaviors.withTimers(timer -> {
       timer.startSingleTimer("T", new Tick(), Duration.ofMillis(10));
-      return Behaviors.receive( (ctx, tick) -> {
+      return Behaviors.receive( (context, tick) -> {
         probe.ref().tell(new Tock());
         return Behaviors.same();
       });

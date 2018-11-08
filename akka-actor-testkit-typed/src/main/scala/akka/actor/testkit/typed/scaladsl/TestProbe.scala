@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2017-2018 Lightbend Inc. <https://www.lightbend.com>
  */
 
@@ -29,7 +29,7 @@ object FishingOutcomes {
   /**
    * Fail fishing with a custom error message
    */
-  def fail(msg: String): FishingOutcome = FishingOutcome.Fail(msg)
+  def fail(message: String): FishingOutcome = FishingOutcome.Fail(message)
 }
 
 object TestProbe {

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2017-2018 Lightbend Inc. <https://www.lightbend.com>
  */
 
@@ -398,7 +398,7 @@ object PersistentActorCompileOnlyTest {
       case Enough ⇒
         Effect.persist(Done)
           .thenRun((_: State) ⇒ println("yay"))
-          .andThenStop
+          .thenStop
     }
 
     private val eventHandler: (State, Event) ⇒ State = {

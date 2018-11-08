@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2009-2018 Lightbend Inc. <https://www.lightbend.com>
  */
 
@@ -36,9 +36,9 @@ public class TestProbeTest {
     probe.expectTerminated(ref, Duration.ofSeconds(1));
 
     Duration remaining = probe.getRemaining();
-    probe.fishForMessage(Duration.ofSeconds(3), "hint", (msg) -> {
-      if (msg.equals("one")) return FishingOutcomes.continueAndIgnore();
-      else if (msg.equals("two")) return FishingOutcomes.complete();
+    probe.fishForMessage(Duration.ofSeconds(3), "hint", (message) -> {
+      if (message.equals("one")) return FishingOutcomes.continueAndIgnore();
+      else if (message.equals("two")) return FishingOutcomes.complete();
       else return FishingOutcomes.fail("error");
     });
 

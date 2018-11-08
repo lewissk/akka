@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016-2018 Lightbend Inc. <https://www.lightbend.com>
  */
 
@@ -23,6 +23,8 @@ private[akka] trait EventsourcedStashManagement[C, E, S] {
   private def context: ActorContext[InternalProtocol] = setup.context
 
   private def stashBuffer: StashBuffer[InternalProtocol] = setup.internalStash
+
+  protected def isStashEmpty: Boolean = stashBuffer.isEmpty
 
   protected def stash(msg: InternalProtocol): Unit = {
     if (setup.settings.logOnStashing) setup.log.debug("Stashing message: [{}]", msg)

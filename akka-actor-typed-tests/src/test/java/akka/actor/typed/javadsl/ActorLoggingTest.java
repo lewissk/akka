@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2009-2018 Lightbend Inc. <https://www.lightbend.com>
  */
 
@@ -46,14 +46,14 @@ public class ActorLoggingTest extends JUnitSuite {
   public void loggingProvidesMDC() {
     Behavior<Protocol> behavior = Behaviors.withMdc(
       null,
-      (msg) -> {
+      (message) -> {
         Map<String, Object> mdc = new HashMap<>();
-        mdc.put("txId", msg.getTransactionId());
+        mdc.put("txId", message.getTransactionId());
         return mdc;
       },
       Behaviors.receive(Protocol.class)
-        .onMessage(Message.class, (ctx, msg) -> {
-          ctx.getLog().info(msg.toString());
+        .onMessage(Message.class, (context, message) -> {
+          context.getLog().info(message.toString());
           return Behaviors.same();
         }).build()
     );

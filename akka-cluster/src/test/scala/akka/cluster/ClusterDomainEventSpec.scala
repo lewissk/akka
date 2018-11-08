@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2009-2018 Lightbend Inc. <https://www.lightbend.com>
  */
 
@@ -169,6 +169,14 @@ class ClusterDomainEventSpec extends WordSpec with Matchers {
       diffReachable(
         state(g1, bUp.uniqueAddress),
         state(g2, bUp.uniqueAddress)) should ===(Seq())
+    }
+
+    "be produced for downed members" in {
+      val (g1, _) = converge(Gossip(members = SortedSet(aUp, eUp)))
+      val (g2, _) = converge(Gossip(members = SortedSet(aUp, eDown)))
+
+      diffMemberEvents(state(g1), state(g2)) should ===(Seq(MemberDowned(eDown)))
+      diffUnreachable(state(g1), state(g2)) should ===(Seq.empty)
     }
 
     "be produced for removed members" in {

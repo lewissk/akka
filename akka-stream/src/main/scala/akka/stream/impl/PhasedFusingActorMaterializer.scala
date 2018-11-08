@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2015-2018 Lightbend Inc. <https://www.lightbend.com>
  */
 
@@ -71,8 +71,9 @@ import akka.util.OptionVal
     val system = actorSystemOf(context)
     val materializerSettings = ActorMaterializerSettings(system)
 
-    val streamSupervisor = context.actorOf(StreamSupervisor.props(materializerSettings, haveShutDown)
-      .withDispatcher(materializerSettings.dispatcher), StreamSupervisor.nextName())
+    val streamSupervisor = context.actorOf(
+      StreamSupervisor.props(materializerSettings, haveShutDown),
+      StreamSupervisor.nextName())
 
     PhasedFusingActorMaterializer(
       system,

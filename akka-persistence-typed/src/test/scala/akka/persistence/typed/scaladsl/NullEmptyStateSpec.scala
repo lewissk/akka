@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2018 Lightbend Inc. <https://www.lightbend.com>
  */
 
@@ -30,7 +30,7 @@ class NullEmptyStateSpec extends ScalaTestWithActorTestKit(NullEmptyStateSpec.co
       emptyState = null,
       commandHandler = (_, command) ⇒ {
         if (command == "stop")
-          Effect.stop
+          Effect.stop()
         else
           Effect.persist(command)
       },
